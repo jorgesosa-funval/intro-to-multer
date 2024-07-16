@@ -1,5 +1,5 @@
 import pool from "../bd/Pool.js"
-import multer  from "multer"
+import multer from "multer"
 
 const index = (req) => {
 
@@ -29,7 +29,7 @@ const update = (req) => {
 
 const updateProfileImage = async (req) => {
     try {
-        
+
         const sql = 'UPDATE users set picture = ? where id = ?';
         await pool.execute(sql, [req.file.filename, req.params.id]);
 
@@ -60,8 +60,21 @@ const storage = multer.diskStorage({
         cb(null, imageName)
     }
 })
+const MIMETYPE = ['image/png', 'image/jpeg'];
+const upload = multer({
+    fileFilter: (req, file, cb) => {
+        if (MIMETYPE.includes(file.mimetype)) {
+            cb(null, true)
+        } else {
+            cb(`Only ${MIMETYPE.join(', ')} mimetypes are allowed`, false)
+        }
+    },
+    limits: {
+        fileSize: 5000000
+    },
+    storage: storage
 
-const upload = multer({ storage: storage })
+})
 
 
 export { index, store, updateProfileImage, upload }

@@ -24,7 +24,6 @@ userRoutes.put('/:id', upload.single('profile'), (req, res, next) => {
 userRoutes.patch('/:id', upload.single('profile'), async (req, res, next) => {
     try {
         const response = await updateProfileImage(req)
-        console.log(response);
         res.status(201).json(response)
     } catch (error) {
         res.status(400).json({ error: error.message })
