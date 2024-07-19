@@ -20,7 +20,7 @@ const show = (req) => {
 const store = async (req, res, next) => {
     try {
             const { body: { id, nombre, email, password } } = req;
-            const sql = 'INSERT INTO users (`id`,`nombre`, `email`, `password`) VALUES (?,?,?)';
+            const sql = 'INSERT INTO users (`id`,`nombre`, `email`, `password`) VALUES (?,?,?,?)';
             await pool.execute(sql, [id, nombre, email, password]);
             res.status(200).json({ success: "user created successfully" })
 
