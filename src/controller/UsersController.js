@@ -1,8 +1,14 @@
 import pool from "../bd/Pool.js"
 import multer from "multer"
 
-const index = (req) => {
-
+const index = async (req, res, next) => {
+    try {
+        const sql = 'SELECT * FROM users';
+        const [respose] = await pool.execute(sql);
+        res.status(200).json(respose)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 
 }
 

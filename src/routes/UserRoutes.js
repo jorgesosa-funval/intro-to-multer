@@ -1,14 +1,13 @@
 import { Router } from 'express'
-import { store, upload, updateProfileImage } from '../controller/UsersController.js'
+import { store, upload, updateProfileImage, index } from '../controller/UsersController.js'
 
 export const userRoutes = Router()
 
 
 
 
-userRoutes.get('/', (req, res, next) => {
-    res.json({ all: "All useres" })
-})
+userRoutes.get('/', index)
+
 userRoutes.get('/:id', (req, res, next) => {
     res.json({ show: "one useres" })
 })
