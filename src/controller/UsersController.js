@@ -17,14 +17,16 @@ const show = (req) => {
 
 }
 /* metodo para crear usuarios */
-const store = async (req) => {
+const store = async (req, res, next) => {
     try {
-        const { body: { nombre, email, password } } = req;
-        const sql = 'INSERT INTO users (`nombre`, `email`, `password`) VALUES (?,?,?)';
-        await pool.execute(sql, [nombre, email, password]);
-        return { success: "user created successfully" }
+        res.status(200).json(req.body)
+        /*     const { body: { nombre, email, password } } = req;
+            const sql = 'INSERT INTO users (`nombre`, `email`, `password`) VALUES (?,?,?)';
+            await pool.execute(sql, [nombre, email, password]);
+     
+            res.status(200).json({ success: "user created successfully" }) */
     } catch (error) {
-        throw error
+        res.status(500).json(error)
     }
 
 }

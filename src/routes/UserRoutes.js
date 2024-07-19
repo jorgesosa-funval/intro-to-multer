@@ -12,10 +12,7 @@ userRoutes.get('/:id', (req, res, next) => {
     res.json({ show: "one useres" })
 })
 
-userRoutes.post('/', async (req, res, next) => {
-    const respose = await store(req)
-    res.json(respose)
-})
+userRoutes.post('/', store)
 userRoutes.put('/:id', upload.single('profile'), (req, res, next) => {
     res.json({ profile: req.file })
 })
